@@ -1,0 +1,62 @@
+{
+  "name": "project-back",
+  "version": "1.0.0",
+  "description": "back",
+  "private": true,
+  "egg": {
+    "declarations": true
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "egg": "^3",
+    "egg-cors": "^2.2.3",
+    "egg-jwt": "^3.1.7",
+    "egg-mysql": "^4.0.0",
+    "egg-scripts": "^2",
+    "egg-sequelize": "^6.0.0",
+    "egg-session": "^3.3.0",
+    "egg-swagger-doc": "^2.3.2",
+    "egg-validate": "^2.0.2",
+    "jsonwebtoken": "^9.0.2",
+    "koa-json-error": "^3.1.2",
+    "koa-jwt": "^4.0.4",
+    "moment": "^2.29.4",
+    "mysql2": "^3.6.0",
+    "node-jsencrypt": "^1.0.0"
+  },
+  "devDependencies": {
+    "egg-bin": "^5",
+    "egg-ci": "^2",
+    "egg-mock": "^5",
+    "eslint": "^8",
+    "eslint-config-egg": "^12"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "scripts": {
+    "start": "egg-scripts start --daemon --title=egg-server-project-back",
+    "stop": "egg-scripts stop --title=egg-server-project-back",
+    "dev": "egg-bin dev",
+    "dev-test": "egg-bin dev --env=test",
+    "dev-preview": "egg-bin dev --env=preview",
+    "dev-production": "egg-bin dev --env=production",
+    "debug": "egg-bin debug",
+    "test": "npm run lint -- --fix && npm run test-local",
+    "test-local": "egg-bin test",
+    "cov": "egg-bin cov",
+    "lint": "eslint .",
+    "ci": "npm run lint && npm run cov",
+    "autod": "autod"
+  },
+  "ci": {
+    "version": "16, 18",
+    "type": "github"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "xqy",
+  "license": "MIT"
+}
