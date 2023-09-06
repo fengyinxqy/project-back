@@ -13,7 +13,6 @@ class LoginService extends Service {
 
     // // 根据用户名查询用户信息
     const user = await ctx.model.User.findOne({ username });
-    console.log(user);
     if (!user) {
       ctx.status = 401;
       ctx.body = { message: '用户名不存在' };
@@ -21,19 +20,18 @@ class LoginService extends Service {
     }
     // // 验证密码
     const isValidPassword = await bcrypt.compareSync(password, user.password);
+    console.log(isValidPassword);
     if (!isValidPassword) {
-      ctx.status = 401;
+      ctx.status = 400;
       ctx.body = { message: '密码不正确' };
-      return;
+      return ctx.body;
     }
     // 签发 Token
     const token = app.jwt.sign({ userId: user.id }, app.config.jwt.secret, { expiresIn: '1d' });
-    ctx.session.user = {
-      username,
-    };
+    ctx.status = 200;
     ctx.body = { message: '登陆成功', token };
     ctx.cookies.set('token', token, {
-      httpOnly: true, // 仅允许服务器读取 Cookie
+      httpOnly: false, // 仅允许服务器读取 Cookie
       signed: true, // 对 Cookie 进行签名
       maxAge: 24 * 60 * 60 * 1000, // 过期时间为一天
     });
