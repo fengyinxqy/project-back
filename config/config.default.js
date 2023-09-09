@@ -26,6 +26,9 @@ module.exports = () => {
       expiresIn: 8 * (60 * 60),
     },
   };
+  config.multipart = {
+    mode: 'file',
+  };
   // 密码加密
   config.bcrypt = {
     saltRounds: 10,

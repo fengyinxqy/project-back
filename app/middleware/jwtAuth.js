@@ -16,10 +16,10 @@ module.exports = () => {
     try {
       // 验证并解码 Token
       const decoded = jwt.verify(token, ctx.app.config.jwt.secret);
+      ctx.status = 200;
       ctx.body = { token };
       // 将解码后的用户信息存放到 ctx 中，方便后续处理
       ctx.user = decoded;
-
       await next();
     } catch (error) {
       ctx.status = 401;

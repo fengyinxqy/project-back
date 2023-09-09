@@ -10,9 +10,11 @@ module.exports = app => {
   router.redirect('/', '/swagger-ui.html', 302);
   // 接口路由
   router.get('/home/test', controller.home.test);
+  router.get('/api/v1/user', controller.user.getUser);
   router.post('/api/v1/user/login', controller.user.login); // 用户登陆
   router.post('/api/v1/user/register', controller.user.register); // 用户注册
   router.post('/api/v1/user/logout', controller.user.logout); // 用户退出登录
+  router.post('/api/v1/avatar/upload', controller.avatar.upload);
 
   // 启动之前创建数据表
   app.beforeStart(async () => {

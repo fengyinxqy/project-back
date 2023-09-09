@@ -9,8 +9,6 @@ class LoginService extends Service {
   async login() {
     const { ctx, app } = this;
     const { username, password } = ctx.request.body;
-    console.log(username, password);
-
     // // 根据用户名查询用户信息
     const user = await ctx.model.User.findOne({ username });
     if (!user) {

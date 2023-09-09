@@ -16,6 +16,10 @@ class UserController extends Controller {
     const { ctx } = this;
     ctx.body = await this.service.user.logout.logout();
   }
+  async getUser() {
+    const { ctx } = this;
+    ctx.body = await this.service.user.getUserInfo.getUserInfo();
+  }
 }
 
 module.exports = UserController;
