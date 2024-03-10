@@ -10,23 +10,23 @@ class LoginService extends Service {
     const { ctx, app } = this;
     const { username, password } = ctx.request.body;
     // // 根据用户名查询用户信息
-    const user = await ctx.model.User.findOne({ username });
+    const user = await ctx.model.User.findOne({ where: { username } });
     if (!user) {
       ctx.status = 401;
-      ctx.body = { message: '用户名不存在' };
+      ctx.body = { code: 401, message: '用户名不存在' };
       return;
     }
     // 验证密码
     const isValidPassword = await bcrypt.compareSync(password, user.password);
     if (!isValidPassword) {
       ctx.status = 400;
-      ctx.body = { message: '密码不正确' };
+      ctx.body = { code: 400, message: '密码不正确' };
       return ctx.body;
     }
     // 签发 Token
     const token = app.jwt.sign({ userId: user.id }, app.config.jwt.secret, { expiresIn: '1d' });
     ctx.status = 200;
-    ctx.body = { message: '登陆成功', token };
+    ctx.body = { code: 200, message: '登陆成功' };
     ctx.cookies.set('token', token, {
       httpOnly: false, // 仅允许服务器读取 Cookie
       signed: true, // 对 Cookie 进行签名

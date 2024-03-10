@@ -28,10 +28,11 @@ class LoginService extends Service {
     const hash_password = bcrypt.hashSync(password, salt);
     try {
       const res = await User.create({
-        username, password: hash_password,
+        username,
+        password: hash_password,
       });
       ctx.logger.info(res);
-      ctx.body = { message: '注册成功' };
+      ctx.body = { code: 200, message: '注册成功，正在跳转至登录页' };
     } catch (error) {
       ctx.status = 400;
       ctx.body = { message: '注册失败' };
