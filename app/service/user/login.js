@@ -16,9 +16,8 @@ class LoginService extends Service {
       ctx.body = { message: '用户名不存在' };
       return;
     }
-    // // 验证密码
+    // 验证密码
     const isValidPassword = await bcrypt.compareSync(password, user.password);
-    console.log(isValidPassword);
     if (!isValidPassword) {
       ctx.status = 400;
       ctx.body = { message: '密码不正确' };
@@ -33,6 +32,7 @@ class LoginService extends Service {
       signed: true, // 对 Cookie 进行签名
       maxAge: 24 * 60 * 60 * 1000, // 过期时间为一天
     });
+    ctx.session.userId = user.id;
     return ctx.body;
   }
 }

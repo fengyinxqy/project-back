@@ -10,6 +10,7 @@ class LoginService extends Service {
     const user = await ctx.model.User.findOne({ where: { username } });
     if (user) {
       // 清空登录session信息
+      ctx.session.userId = null;
       ctx.status = 200;
       ctx.body = {
         code: 0,

@@ -11,7 +11,6 @@ class GetUserInfo extends Service {
       where: { id },
       attributes: { exclude: [ 'password' ] }, // 排除 password 字段
     });
-    console.log(user.dataValues);
     if (!user) {
       ctx.status = 401;
       ctx.body = { message: '用户名不存在' };
