@@ -5,12 +5,11 @@ const Service = require('egg').Service;
 const bcrypt = require('bcryptjs');
 
 class LoginService extends Service {
-  // 检查用户名
   async register() {
     const { ctx, app } = this;
     const { username, password } = ctx.request.body;
 
-    // // 根据用户名查询用户信息
+    // 根据用户名查询用户信息
     const User = app.model.User;
     const user = await User.findOne({
       where: {
@@ -23,7 +22,7 @@ class LoginService extends Service {
       ctx.body = { message: '用户名已存在' };
       return ctx.body;
     }
-    // // 加密存储
+    // 加密存储
     const salt = bcrypt.genSaltSync(10);
     const hash_password = bcrypt.hashSync(password, salt);
     try {

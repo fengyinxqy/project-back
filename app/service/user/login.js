@@ -5,11 +5,10 @@ const Service = require('egg').Service;
 const bcrypt = require('bcryptjs');
 
 class LoginService extends Service {
-  // 检查用户名
   async login() {
     const { ctx, app } = this;
     const { username, password } = ctx.request.body;
-    // // 根据用户名查询用户信息
+    // 根据用户名查询用户信息
     const user = await ctx.model.User.findOne({ where: { username }, raw: true });
     if (!user) {
       ctx.status = 401;

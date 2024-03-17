@@ -20,6 +20,11 @@ class UserController extends Controller {
     const { ctx } = this;
     ctx.body = await this.service.user.getUserInfo.getUserInfo();
   }
+  async updateUserInfo() {
+    const { ctx } = this;
+    const { username, oldPassword, newPassword } = ctx.request.body;
+    ctx.body = await ctx.service.user.updateUserInfo.updateUserInfo(username, oldPassword, newPassword);
+  }
 }
 
 module.exports = UserController;
