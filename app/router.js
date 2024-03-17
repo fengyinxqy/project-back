@@ -16,6 +16,9 @@ module.exports = app => {
   router.post('/api/v1/user/logout', controller.user.logout); // 用户退出登录
   router.post('/api/v1/avatar/upload', controller.avatar.upload);
 
+  router.get('/api/v1/article', controller.article.getArticleList);
+  router.post('/api/v1/article', controller.article.uploadArticle);
+
   // 启动之前创建数据表
   app.beforeStart(async () => {
     // 应用会等待这个函数执行完成才启动
