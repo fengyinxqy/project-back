@@ -3,10 +3,10 @@
 const Service = require('egg').Service;
 
 class UploadArticle extends Service {
-  async uploadArticle(title, content, author) {
+  async uploadArticle(title, content, authorId, authorName) {
     const { ctx } = this;
     try {
-      const result = await this.ctx.model.Article.create({ title, content, author });
+      const result = await this.ctx.model.Article.create({ title, content, authorId, authorName });
       ctx.logger.info(result);
       ctx.body = { code: 200, message: '创建文章成功' };
       return ctx.body;

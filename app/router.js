@@ -17,7 +17,12 @@ module.exports = app => {
   router.post('/api/v1/avatar/upload', controller.avatar.upload);
 
   router.get('/api/v1/article', controller.article.getArticleList);
+  router.get('/api/v1/article/:id', controller.article.getArticleById);
   router.post('/api/v1/article', controller.article.uploadArticle);
+  // 上传评论接口
+  router.post('/api/v1/comment', controller.comment.uploadComment);
+  // 获取评论接口
+  router.get('/api/v1/comment/:id', controller.comment.getComments);
 
   // 启动之前创建数据表
   app.beforeStart(async () => {

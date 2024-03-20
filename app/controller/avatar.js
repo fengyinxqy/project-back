@@ -22,8 +22,6 @@ class AvatarController extends Controller {
     // 返回前端路径
     const newUrl = 'http://127.0.0.1:7001' + toFileName;
 
-    // 存储到数据库
-    // const results = await this.app.mysql.query('update user set headPicPath = ? where userId = ?', [newUrl, userId]);
     ctx.body = {
       msg: '图片上传成功',
       url: newUrl,
