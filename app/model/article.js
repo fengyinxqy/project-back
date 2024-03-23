@@ -8,6 +8,7 @@ module.exports = app => {
     content: TEXT,
     authorId: INTEGER,
     authorName: STRING(50),
+    article_like: { type: INTEGER, defaultValue: 0 },
     createdAt: { type: DATE, defaultValue: app.Sequelize.literal('CURRENT_TIMESTAMP') },
     updatedAt: { type: DATE, defaultValue: app.Sequelize.literal('CURRENT_TIMESTAMP') },
   });

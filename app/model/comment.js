@@ -8,6 +8,9 @@ module.exports = app => {
     authorId: INTEGER,
     authorName: STRING(50),
     articleId: INTEGER,
+    parentCommentId: INTEGER,
+    replayCommentId: INTEGER,
+    like: { type: INTEGER, defaultValue: 0 },
     createdAt: { type: DATE, defaultValue: app.Sequelize.literal('CURRENT_TIMESTAMP') },
     updatedAt: { type: DATE, defaultValue: app.Sequelize.literal('CURRENT_TIMESTAMP') },
   });
