@@ -38,7 +38,7 @@ jobs:
       run: npm i
 
     - name: Continuous Integration
-      run: npm run ci
+      run: yarn start
 
     - name: Code Coverage
       uses: codecov/codecov-action@v3
