@@ -13,43 +13,45 @@ class Comment extends Service {
       const comment = await ctx.model.Comment.create(params);
       ctx.logger.info(comment);
       ctx.status = 200;
-      const uploadComment = await this.getCommentsByArticleId(comment.dataValues.articleId);
-      return { code: 200, message: '评论成功', data: uploadComment };
+      return { code: 200, message: '评论成功' };
     } catch (error) {
       ctx.status = 500;
       return { code: 500, message: '评论失败' };
     }
   }
 
+
   async getCommentsByArticleId(articleId) {
     const { ctx } = this;
     try {
       const comments = await ctx.model.Comment.findAll({ where: { articleId, parentCommentId: null }, raw: true });
-      const count = comments.length;
+      let count = comments.length;
       await Promise.all(comments.map(async comment => {
-        comment.isOpen = false;
-        const subComments = await this.getAllSubComment(comment.commentId);
-        subComments.map(item => {
-          item.isOpen = false;
-          return item;
+        const user = await ctx.model.User.findOne({
+          where: { id: comment.authorId },
+          attributes: { exclude: [ 'password' ] }, // 排除 password 字段
+          raw: true,
         });
-        comment.subComments = subComments;
+
+        comment.avatar = user.avatar;
+        comment.isOpen = false;
+
+        const subComments = await this.getAllSubComment(comment.commentId);
+        count += subComments.length;
+        const updatedSubComments = await Promise.all(subComments.map(async item => {
+          item.isOpen = false;
+          const user = await ctx.model.User.findOne({
+            where: { id: item.authorId },
+            attributes: { exclude: [ 'password' ] }, // 排除 password 字段
+            raw: true,
+          });
+          item.avatar = user.avatar;
+          return item;
+        }));
+        comment.subComments = updatedSubComments;
         return comment;
       }));
-      ctx.logger.info(comments);
       return { code: 200, message: '获取评论成功', data: { count, comments } };
-    } catch (error) {
-      ctx.status = 500;
-      return { code: 500, message: '获取评论失败' };
-    }
-  }
-
-  async getOneComment(commentId) {
-    const { ctx } = this;
-    try {
-      const comment = await ctx.model.Comment.findOne({ where: { commentId }, raw: true });
-      ctx.logger.info(comment);
-      return comment;
     } catch (error) {
       ctx.status = 500;
       return { code: 500, message: '获取评论失败' };

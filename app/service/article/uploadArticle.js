@@ -6,9 +6,8 @@ class UploadArticle extends Service {
   async uploadArticle(title, content, authorId, authorName) {
     const { ctx } = this;
     try {
-      const result = await this.ctx.model.Article.create({ title, content, authorId, authorName });
-      ctx.logger.info(result);
-      ctx.body = { code: 200, message: '创建文章成功' };
+      const { articleId } = await this.ctx.model.Article.create({ title, content, authorId, authorName, raw: true });
+      ctx.body = { code: 200, message: '创建文章成功', data: { articleId } };
       return ctx.body;
     } catch (error) {
       ctx.status = 500;

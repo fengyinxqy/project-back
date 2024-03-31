@@ -19,11 +19,9 @@ module.exports = app => {
     password: DataTypes.STRING,
     avatar: {
       type: DataTypes.STRING,
-      defaultValue: '',
+      defaultValue: 'http://127.0.0.1:7001/public/upload/default-avatar.jpg',
       comment: '头像链接',
     },
-  }, {
-    timestamps: false, // 关闭自动生成的 createdAt 和 updatedAt 字段
   });
 
   return User;
