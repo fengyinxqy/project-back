@@ -29,4 +29,8 @@ module.exports = {
     enable: true,
     package: 'egg-validate',
   },
+  websocket: {
+    enable: true,
+    package: 'egg-websocket-plugin',
+  },
 };

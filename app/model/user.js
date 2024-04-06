@@ -22,6 +22,7 @@ module.exports = app => {
       defaultValue: 'http://127.0.0.1:7001/public/upload/default-avatar.jpg',
       comment: '头像链接',
     },
+    role: { type: DataTypes.INTEGER, defaultValue: 0 },
   });
 
   return User;

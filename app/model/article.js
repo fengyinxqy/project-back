@@ -9,6 +9,7 @@ module.exports = app => {
     authorId: INTEGER,
     authorName: STRING(50),
     article_like: { type: INTEGER, defaultValue: 0 },
+    isDisplay: { type: INTEGER, defaultValue: 1 },
     createdAt: { type: DATE, defaultValue: app.Sequelize.literal('CURRENT_TIMESTAMP') },
     updatedAt: { type: DATE, defaultValue: app.Sequelize.literal('CURRENT_TIMESTAMP') },
   });

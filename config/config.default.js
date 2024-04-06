@@ -101,6 +101,14 @@ module.exports = () => {
     encrypt: true,
   };
 
+  config.websocket = {
+    redis: {
+      host: '127.0.0.1',
+      port: 6379,
+      password: '626488',
+    },
+  };
+
   return {
     ...config,
     ...userConfig,

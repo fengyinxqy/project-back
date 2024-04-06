@@ -6,18 +6,31 @@ class ArticleController extends Controller {
   async uploadArticle() {
     const { ctx } = this;
     const { title, content, authorId, authorName } = ctx.request.body;
-    ctx.body = await ctx.service.article.uploadArticle.uploadArticle(title, content, authorId, authorName);
+    ctx.body = await ctx.service.article.uploadArticle(title, content, authorId, authorName);
   }
 
   async getArticleList() {
     const { ctx } = this;
-    ctx.body = await ctx.service.article.getArticleList.getArticleList();
+    ctx.body = await ctx.service.article.getArticleList();
   }
 
   async getArticleById() {
     const { ctx } = this;
     const id = ctx.params.id;
-    ctx.body = await ctx.service.article.getArticleList.getArticleById(id);
+    ctx.body = await ctx.service.article.getArticleById(id);
+  }
+
+  async deleteArticleById() {
+    const { ctx } = this;
+    const id = ctx.params.id;
+    ctx.body = await ctx.service.article.deleteArticleById(id);
+  }
+
+  async updateArticleDisplayById() {
+    const { ctx } = this;
+    const id = ctx.params.id;
+    const { isDisplay } = ctx.request.body;
+    ctx.body = await ctx.service.article.updateArticleDisplayById(id, isDisplay);
   }
 }
 
