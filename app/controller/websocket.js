@@ -5,7 +5,7 @@ class WebSocketController extends Controller {
     const { ctx } = this;
     ctx.websocket.onmessage = msg => {
       const data = JSON.parse(msg.data);
-      const [ type, message ] = data;
+      const [type, message] = data;
       if (type === 'join') {
         const { roomID, username } = message;
         ctx.websocket.room.join(roomID); // 加入房间
@@ -24,15 +24,6 @@ class WebSocketController extends Controller {
       console.log(err);
       this.join();
     };
-    // const { roomID } = ctx.socket.packet[1]; // 假设客户端发送的数据包格式为["join", { roomID: "123" }]
-    // const socket = ctx.websocket;
-    // const id = socket.id;
-
-    // socket.room.join(roomID); // 加入房间
-    // console.log(`用户${id}加入了房间${roomID}`);
-
-    // // 向房间内的所有成员广播
-    // socket.room.sendTo(roomID, `用户${id}加入了房间`);
   }
 }
 

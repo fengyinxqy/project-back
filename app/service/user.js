@@ -8,7 +8,7 @@ const path = require('path');
 class User extends Service {
   async getAllUser() {
     const { ctx } = this;
-    const user = await ctx.model.User.findAll({ attributes: { exclude: [ 'password' ] } });
+    const user = await ctx.model.User.findAll({ attributes: { exclude: ['password'] } });
     if (!user) {
       ctx.status = 400;
       ctx.body = { code: 400, message: '获取用户信息失败' };
@@ -26,7 +26,7 @@ class User extends Service {
     const { username } = ctx.request.query;
     const user = await ctx.model.User.findOne({
       where: { username },
-      attributes: { exclude: [ 'password', 'role' ] }, // 排除 password 字段
+      attributes: { exclude: ['password', 'role'] }, // 排除 password 字段
       raw: true,
     });
     if (!user) {
@@ -104,7 +104,7 @@ class User extends Service {
       where: {
         username,
       },
-      attributes: [ 'id', 'username', 'password' ],
+      attributes: ['id', 'username', 'password'],
     });
     if (user) {
       ctx.status = 400;
@@ -192,7 +192,6 @@ class User extends Service {
       ctx.body = { code: 200, message: '修改成功' };
       return ctx.body;
     } catch (error) {
-      console.log(error);
       ctx.status = 500;
       ctx.body = { code: 500, message: '服务器错误' };
       return ctx.body;

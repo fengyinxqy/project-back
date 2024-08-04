@@ -1,28 +1,34 @@
 'use strict';
 
 module.exports = app => {
-  const { DataTypes } = require('sequelize');
-  // 请确保 Sequelize 库被正确引入，并且从中获取 DataTypes 对象
+  const { UUID, STRING, ENUM } = require('sequelize');
 
   const User = app.model.define('users', {
     id: {
-      type: DataTypes.INTEGER,
+      type: UUID,
+      defaultValue: app.Sequelize.UUIDV4,
       primaryKey: true,
-      autoIncrement: true,
     },
     username: {
-      type: DataTypes.STRING,
+      type: STRING,
       allowNull: false,
       unique: 'username',
       comment: '用户名，唯一',
     },
-    password: DataTypes.STRING,
+    password: {
+      type: STRING,
+      allowNull: false,
+    },
     avatar: {
-      type: DataTypes.STRING,
+      type: STRING,
       defaultValue: 'http://127.0.0.1:7001/public/upload/default-avatar.jpg',
       comment: '头像链接',
     },
-    role: { type: DataTypes.INTEGER, defaultValue: 0 },
+    role: {
+      type: ENUM,
+      values: ['admin', 'user'],
+      defaultValue: 'user'
+    },
   });
 
   return User;

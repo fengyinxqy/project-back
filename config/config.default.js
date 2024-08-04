@@ -15,7 +15,7 @@ module.exports = () => {
   config.keys = '6x6q6y';
 
   // add your middleware config here
-  config.middleware = [ 'error', 'jwtAuth' ];
+  config.middleware = ['error', 'jwtAuth'];
   config.jwtAuth = {
     ignore: [
       '/api/v1/user/login',
@@ -47,7 +47,7 @@ module.exports = () => {
     host: 'localhost',
     port: 3306,
     username: 'root',
-    password: '626488',
+    password: '626488xqy',
     database: 'blog',
   };
 
@@ -65,7 +65,7 @@ module.exports = () => {
       description: 'swagger 测试接口文档', // 接口文档描述
       version: '1.0.0', // 接口文档版本
     },
-    schemes: [ 'http', 'https' ], // 配置支持的协议
+    schemes: ['http', 'https'], // 配置支持的协议
     // consumes: [ 'application/json' ], // 指定处理请求的提交内容类型（Content-Type），例如application/json, text/html
     // produces: [ 'application/json' ], // 指定返回的内容类型，仅当request请求头中的(Accept)类型中包含该指定类型才返回
     securityDefinitions: { // 配置接口安全授权方式
@@ -82,7 +82,7 @@ module.exports = () => {
       enable: false,
       ignoreJSON: true,
     },
-    domainWhiteList: [ 'http://127.0.0.1' ],
+    domainWhiteList: ['http://127.0.0.1'],
   };
   config.cors = {
     origin: '*',
@@ -101,13 +101,13 @@ module.exports = () => {
     encrypt: true,
   };
 
-  config.websocket = {
-    redis: {
-      host: '127.0.0.1',
-      port: 6379,
-      password: '626488',
-    },
-  };
+  // config.websocket = {
+  //   redis: {
+  //     host: '127.0.0.1',
+  //     port: 6379,
+  //     password: '626488',
+  //   },
+  // };
 
   return {
     ...config,
